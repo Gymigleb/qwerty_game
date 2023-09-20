@@ -8,13 +8,13 @@
 
 using namespace std;
 
-int get_random(int min, int max)
+int get_random(int min, int max) // random in range from 0 to 3
 {
     int num = min + rand() % (max - min + 1); // 0 - left // 1 - top // 2 - right // 3 - bottom //
     return num;
 }
 
-bool can_move(int left, int top, int right, int bottom)
+bool can_move(int left, int top, int right, int bottom) //this func return false if you in ded end
 {
     if(left == 1 && top == 1 && right == 1 && bottom == 1) {return false;}
     return true;
@@ -22,14 +22,17 @@ bool can_move(int left, int top, int right, int bottom)
 
 void rand_treck(int num_str, int num_column, int field[9][9])
 {
-    int direction;
+    /*
+    this func make 1 treck from left top corner(1,1) to right bottom corner(n-1,n-1) alwaus different
+    */
+    int direction; //direction of movement
     int pos_str = 1;
     int pos_column  = 1;
     bool gg = true;
-    field[1][1] = 1; // 0 - wall // 1 - i was there, rand it //
-    vector <int> treck = {0};
+    field[1][1] = 1; // this arr fild only // 0 - wall /or/ 1 - i was there, rand it
+    vector <int> treck = {0}; // arr of derictions
 
-    while (pos_str != num_str - 2 || pos_column != num_column - 2)
+    while (pos_str != num_str - 2 || pos_column != num_column - 2) // we make treck while we aren't in right bottom corner(n-1,n-1)
     {
         gg = true;
 
