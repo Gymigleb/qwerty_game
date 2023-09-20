@@ -6,7 +6,7 @@ using namespace std;
 
 int main()
 {
-    srand(time(NULL));
+    srand(time(NULL)); // create random seed
     int x;
     x = rand();
     cout << "x = " << x << endl;

@@ -9,9 +9,9 @@
 
 using namespace std;
 
-bool rcheck(int field[str][colomn], int i, int j)
+bool rcheck(int field[str][colomn], int i, int j) // checking that during a move there is 1 symbol, only one cell will correspond
 {
-    if (field[i][j] == field[i][j + 2] && field[i][j - 2]) { return false; }
+    if (field[i][j] == field[i][j + 2] && field[i][j - 2]) { return false; } 
 
     if (field[i][j] == field[i - 1][j - 1] && field[i + 1][j + 1]) { return false; }
 

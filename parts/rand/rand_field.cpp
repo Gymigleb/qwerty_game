@@ -27,15 +27,15 @@ int main()
 
     for (int i = 0; i < num_str; i++)
     {
-        for (int j = 0; j < num_column; j++)
+        for (int j = 0; j < num_column; j++) 
         {
-                if(i == 0 || j == 0) {field[i][j] = wall_char;}
-                else if(i == num_str - 1 || j == num_column - 1) {field[i][j] = wall_char;}
-                else {field[i][j] = get_random(min_char,max_char);}
+                if(i == 0 || j == 0) {field[i][j] = wall_char;} // create walls
+                else if(i == num_str - 1 || j == num_column - 1) {field[i][j] = wall_char;}// create walls
+                else {field[i][j] = get_random(min_char,max_char);} // create random numbers in ASCII
         }
     }
 
-    for (int i = 0; i < num_str; i++)
+    for (int i = 0; i < num_str; i++) // this part of code displays the field on the screen
     {
         for (int j = 0; j < num_column; j++)
         {
