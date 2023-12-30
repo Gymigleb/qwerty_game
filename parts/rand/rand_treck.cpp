@@ -1,26 +1,35 @@
 #include <bits/stdc++.h>
-#include "storadge.cpp"
 #include "random.cpp"
+#include "output.cpp"
 
 using namespace std;
-
-// int get_random(int min, int max) // random in range from min to max in my case from 0 to 3
-// {
-//     int num = min + rand() % (max - min + 1); // 0 - left // 1 - top // 2 - right // 3 - bottom //
-//     return num;
-// }
 
 bool can_move(int left, int top, int right, int bottom)
 {
     /*this func check where a you. it return false if you in ded end, else return true*/
-    
-    if(left == 1 && top == 1 && right == 1 && bottom == 1) {return false;}
+
+    if(left != 0 && top != 0 && right != 0 && bottom != 0) {return false;}
     return true;
+}
+
+void field_prepare(int field[num_str][num_column])
+{
+    for (int i = 0; i < num_str; i++)
+    {
+        for (int j = 0; j < num_column; j++)
+        {
+            if(i == 0 || j == 0) {field[i][j] = wall_char;} // create left and top walls
+            else if(i == num_str - 1 || j == num_column - 1) {field[i][j] = wall_char;}// create right and bottom walls
+            else {field[i][j] = 0;}
+        }
+    }
 }
 
 void rand_treck(int num_str, int num_column, int field[9][9])
 {
     /*this func make random treck (using 1) from left top corner(1,1) to right bottom corner(n-1,n-1) alwaus different*/
+
+    field_prepare(field);
 
     int direction; //direction of movement
     int pos_str = 1;
@@ -81,28 +90,24 @@ void rand_treck(int num_str, int num_column, int field[9][9])
         {
             if(treck.back() == 0)
             {
-                // field[pos_str][pos_column] = 0;
                 pos_column++;
                 treck.pop_back();
             }
 
             else if(treck.back() == 1)
             {
-                // field[pos_str][pos_column] = 0;
                 pos_str++;
                 treck.pop_back();
             }
 
             else if(treck.back() == 2)
             {
-                // field[pos_str][pos_column] = 0;
                 pos_column--;
                 treck.pop_back();
             }
 
             else if(treck.back() == 3)
             {
-                // field[pos_str][pos_column] = 0;
                 pos_str--;
                 treck.pop_back();
             }
@@ -110,33 +115,12 @@ void rand_treck(int num_str, int num_column, int field[9][9])
     }
 }
 
+// int main()
+// {
+//     srand(time(NULL));
 
-int main()
-{
-    srand(time(NULL));
+//     int field[num_str][num_column];
 
-    int field[num_str][num_column];
-
-    for (int i = 0; i < num_str; i++)
-    {
-        for (int j = 0; j < num_column; j++)
-        {
-                if(i == 0 || j == 0) {field[i][j] = 1;}
-                else if(i == num_str - 1 || j == num_column - 1) {field[i][j] = 1;}
-                else {field[i][j] = 0;}
-        }
-    }
-
-    rand_treck(num_str, num_column, field);
-
-    cout << endl;
-
-    for (int i = 0; i < num_str; i++)
-    {
-        for (int j = 0; j < num_column; j++)
-        {
-            cout << field[i][j] << " ";
-        }
-    cout << endl;
-    }
-}
+//     rand_treck(num_str, num_column, field);
+//     output(field);
+// }
