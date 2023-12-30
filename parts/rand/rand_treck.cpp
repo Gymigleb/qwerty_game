@@ -8,7 +8,7 @@ bool can_move(int left, int top, int right, int bottom)
 {
     /*this func check where a you. it return false if you in ded end, else return true*/
 
-    if(left != 0 && top != 0 && right != 0 && bottom != 0) {return false;}
+    if(left != void_char && top != void_char && right != void_char && bottom != void_char) {return false;}
     return true;
 }
 
@@ -20,12 +20,12 @@ void field_prepare(int field[num_str][num_column])
         {
             if(i == 0 || j == 0) {field[i][j] = wall_char;} // create left and top walls
             else if(i == num_str - 1 || j == num_column - 1) {field[i][j] = wall_char;}// create right and bottom walls
-            else {field[i][j] = 0;}
+            else {field[i][j] = void_char;}
         }
     }
 }
 
-void rand_treck(int num_str, int num_column, int field[9][9])
+void rand_treck(int field[num_str][num_column])
 {
     /*this func make random treck (using 1) from left top corner(1,1) to right bottom corner(n-1,n-1) alwaus different*/
 
@@ -49,7 +49,7 @@ void rand_treck(int num_str, int num_column, int field[9][9])
             {
                 direction = random(0,3);
 
-                if(direction == 0 && field[pos_str][pos_column - 1] == 0)
+                if(direction == 0 && field[pos_str][pos_column - 1] == void_char)
                 {
                     pos_column--;
                     field[pos_str][pos_column] = 1;
@@ -58,7 +58,7 @@ void rand_treck(int num_str, int num_column, int field[9][9])
                     break;
                 }
 
-                else if(direction == 1 && field[pos_str - 1][pos_column] == 0)
+                else if(direction == 1 && field[pos_str - 1][pos_column] == void_char)
                 {
                     pos_str--;
                     field[pos_str][pos_column] = 1;
@@ -67,7 +67,7 @@ void rand_treck(int num_str, int num_column, int field[9][9])
                     break;
                 }
 
-                else if(direction == 2 && field[pos_str][pos_column + 1] == 0)
+                else if(direction == 2 && field[pos_str][pos_column + 1] == void_char)
                 {
                     pos_column++;
                     field[pos_str][pos_column] = 1;
@@ -76,7 +76,7 @@ void rand_treck(int num_str, int num_column, int field[9][9])
                     break;
                 }
 
-                else if(direction == 3 && field[pos_str + 1][pos_column] == 0)
+                else if(direction == 3 && field[pos_str + 1][pos_column] == void_char)
                 {
                     pos_str++;
                     field[pos_str][pos_column] = 1;
@@ -115,12 +115,12 @@ void rand_treck(int num_str, int num_column, int field[9][9])
     }
 }
 
-// int main()
-// {
-//     srand(time(NULL));
+int main()
+{
+    srand(time(NULL));
 
-//     int field[num_str][num_column];
+    int field[num_str][num_column];
 
-//     rand_treck(num_str, num_column, field);
-//     output(field);
-// }
+    rand_treck(field);
+    output(field);
+}

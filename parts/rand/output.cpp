@@ -9,8 +9,8 @@ void output(int field[num_str][num_column])
     {
         for (int j = 0; j < num_column; j++)
         {
-            // cout << (char) field[i][j] << " ";
-            cout << field[i][j] << " ";
+            cout << (char) field[i][j];
+            // cout << field[i][j] << " ";
         }
     cout << endl;
     }

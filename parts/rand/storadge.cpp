@@ -7,3 +7,4 @@ int const num_column = 9;
 int const min_char = 33;
 int const max_char = 122;
 int const wall_char = 219;
+int const void_char = 32;
