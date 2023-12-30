@@ -1,36 +1,32 @@
-// #include <iostream> // defolt
-// #include <conio.h> // to read symbols from keyboard
-// #include<windows.h> // to change color
-// #include <stdlib.h> // to rand
-// #include <time.h> // to rand
-// #include <vector>
 #include <bits/stdc++.h>
 #include "storadge.cpp"
+#include "random.cpp"
 
 using namespace std;
 
-int get_random(int min, int max) // random in range from 0 to 3
-{
-    int num = min + rand() % (max - min + 1); // 0 - left // 1 - top // 2 - right // 3 - bottom //
-    return num;
-}
+// int get_random(int min, int max) // random in range from min to max in my case from 0 to 3
+// {
+//     int num = min + rand() % (max - min + 1); // 0 - left // 1 - top // 2 - right // 3 - bottom //
+//     return num;
+// }
 
-bool can_move(int left, int top, int right, int bottom) //this func return false if you in ded end
+bool can_move(int left, int top, int right, int bottom)
 {
+    /*this func check where a you. it return false if you in ded end, else return true*/
+    
     if(left == 1 && top == 1 && right == 1 && bottom == 1) {return false;}
     return true;
 }
 
 void rand_treck(int num_str, int num_column, int field[9][9])
 {
-    /*
-    this func make 1 treck from left top corner(1,1) to right bottom corner(n-1,n-1) alwaus different
-    */
+    /*this func make random treck (using 1) from left top corner(1,1) to right bottom corner(n-1,n-1) alwaus different*/
+
     int direction; //direction of movement
     int pos_str = 1;
     int pos_column  = 1;
-    bool gg = true;
-    field[1][1] = 1; // this arr fild only // 0 - wall /or/ 1 - i was there, rand it
+    bool gg = true; // It's temporary, i hope
+    field[1][1] = 1; // this arr fild only // 0 - wall /or/ 1 - i have to rand this cell
     vector <int> treck = {0}; // arr of derictions
 
     while (pos_str != num_str - 2 || pos_column != num_column - 2) // we make treck while we aren't in right bottom corner(n-1,n-1)
@@ -39,9 +35,10 @@ void rand_treck(int num_str, int num_column, int field[9][9])
 
         if(can_move(field[pos_str + 1][pos_column], field[pos_str - 1][pos_column], field[pos_str][pos_column + 1], field[pos_str][pos_column - 1]))
         {
+            /*if we can move ve move in random deriction*/
             while (gg)
             {
-                direction = get_random(0,3);
+                direction = random(0,3);
 
                 if(direction == 0 && field[pos_str][pos_column - 1] == 0)
                 {
