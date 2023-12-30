@@ -1,3 +1,5 @@
+#include <bits/stdc++.h>
+
 using namespace std;
 //storage of const
 int const num_str = 9;
