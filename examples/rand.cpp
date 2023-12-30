@@ -8,6 +8,8 @@ int main()
 {
     srand(time(NULL)); // create random seed
     int x;
-    x = rand();
+    int start = 10;
+    int end = 30;
+    x = rand() % (end - start + 1) + start;
     cout << "x = " << x << endl;
 }
