@@ -1,3 +1,13 @@
+//description//description//description//description//description//description//
+/*
+This programm make field like that
+HHHHHH symbol 'H' it is wall
+H    H symbol ' ' it is place what wiil be changed on random symbols
+H    H
+HHHHHH
+*/
+//description//description//description//description//description//description//
+
 #include <iostream> // defolt
 #include <conio.h> // to read symbols from keyboard
 #include<windows.h> // to change color

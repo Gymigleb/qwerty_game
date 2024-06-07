@@ -117,6 +117,8 @@ int main()
 {
     srand(time(NULL));
 
+//this part of code from file what named "rand_field.cpp"//
+
     int field[num_str][num_column];
 
     for (int i = 0; i < num_str; i++)
@@ -128,6 +130,8 @@ int main()
                 else {field[i][j] = 0;}
         }
     }
+    
+//this part of code from file what named "rand_field.cpp"//
 
     rand_treck(num_str, num_column, field);
 
