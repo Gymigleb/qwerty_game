@@ -42,7 +42,7 @@ bool can_move(int left, int top, int right, int bottom)
 int now_pos(int now_str, int now_column)
 {
     /*calculates and return now position*/
-    return now_str * (num_column - 1) + now_column;
+    return now_str * num_column + now_column;
 }
 
 void debagging_out(int *field, string comment)
@@ -62,8 +62,6 @@ void debagging_out(int *field, string comment)
 
 void made_random_map(int *field)
 {
-    // int field[num_str][num_column];
-
     int *cursor = field; // neded to write field
 
     for (int i = 0; i < num_str; i++) // prepare arr
@@ -71,12 +69,16 @@ void made_random_map(int *field)
         for (int j = 0; j < num_column; j++)
         {
                 if(i == 0 || j == 0) {*cursor = 1;}
-                else if(i == 1 || j == 1) {*cursor = 1;}
+                else if(i == 1 && j == 1) {*cursor = 1;}
                 else if(i == num_str - 1 || j == num_column - 1) {*cursor = 1;}// 1 - wall, i was there, rand it later // 0 - never be there
                 else {*cursor = 0;}
                 cursor++;
         }
     }
+
+    cursor = NULL;
+
+    debagging_out(field, "start");
 
     int now_str = 1;
     int now_column = 1;
@@ -86,9 +88,8 @@ void made_random_map(int *field)
 
     while (now_str != num_str - 2 || now_column != num_column - 2)
     {
-        if(can_move(*(field + now_pos(now_str, now_column) - 1), *(field + now_pos(now_str, now_column) - (num_column - 1)), *(field + now_pos(now_str, now_column) + 1), *(field + now_pos(now_str, now_column) + (num_column - 1))))
+        if(can_move(*(field + now_pos(now_str, now_column) - 1), *(field + now_pos(now_str, now_column) - num_column), *(field + now_pos(now_str, now_column) + 1), *(field + now_pos(now_str, now_column) + num_column)))
         {
-            cout << "if ";
             direction = get_random_int(0,3); // 0 - left // 1 - top // 2 - right // 3 - bottom
 
             if(direction == 0 && *(field + now_pos(now_str, now_column) - 1) == 0) // 0 - left
@@ -105,7 +106,7 @@ void made_random_map(int *field)
                 debagging_out(field, "|if0");
             }
 
-            else if(direction == 1 && *(field + now_pos(now_str, now_column) - (num_column - 1)) == 0) // 1 - top
+            else if(direction == 1 && *(field + now_pos(now_str, now_column) - num_column ) == 0) // 1 - top
             {
                 debagging_out(field, "if1|");
                 int *cursor = field; // neded to write field
@@ -133,7 +134,7 @@ void made_random_map(int *field)
                 debagging_out(field, "|if2");
             }
 
-            else if(direction == 3 && *(field + now_pos(now_str, now_column) + (num_column - 1)) == 0)// 3 - bottom
+            else if(direction == 3 && *(field + now_pos(now_str, now_column) + num_column) == 0)// 3 - bottom
             {
                 debagging_out(field, "if3|");
                 int *cursor = field; // neded to write field
