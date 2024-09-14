@@ -76,102 +76,93 @@ void made_random_map(int *field)
         }
     }
 
-    cursor = NULL;
-
     debagging_out(field, "start");
 
     int now_str = 1;
     int now_column = 1;
     int direction;
 
+    int gg = 0;
+
     vector <int> treck = {0}; //this vector save all way
 
-    while (now_str != num_str - 2 || now_column != num_column - 2)
+    while (cursor != field + 28)
     {
+        gg++;
+        if (gg > 1) {debagging_out(field, "gg"); cout << treck.back();}
         if(can_move(*(field + now_pos(now_str, now_column) - 1), *(field + now_pos(now_str, now_column) - num_column), *(field + now_pos(now_str, now_column) + 1), *(field + now_pos(now_str, now_column) + num_column)))
         {
             direction = get_random_int(0,3); // 0 - left // 1 - top // 2 - right // 3 - bottom
 
             if(direction == 0 && *(field + now_pos(now_str, now_column) - 1) == 0) // 0 - left
             {
-                debagging_out(field, "if0|");
-                int *cursor = field; // neded to write field
+                cursor = field + now_pos(now_str, now_column); // neded to write field
                 now_column--; // change position
                 cursor + (now_pos(now_str, now_column)); // move cursor to now position
                 *cursor = 1; // marking way
                 treck.push_back(direction); // remeber way
-                cursor = new int;
-                delete cursor; // clear memory
-                cursor = NULL;
-                debagging_out(field, "|if0");
+                gg = 0;
             }
 
-            else if(direction == 1 && *(field + now_pos(now_str, now_column) - num_column ) == 0) // 1 - top
+            else if(direction == 1 && *(field + now_pos(now_str, now_column) - num_column) == 0) // 1 - top
             {
-                debagging_out(field, "if1|");
-                int *cursor = field; // neded to write field
+                cursor = field + now_pos(now_str, now_column); // neded to write field
                 now_str--; // change position
                 cursor + (now_pos(now_str, now_column)); // move cursor to now position
                 *cursor = 1; // marking way
                 treck.push_back(direction); // remeber way
-                cursor = new int;
-                delete cursor; // clear memory
-                cursor = NULL;
-                debagging_out(field, "|if1");
+                gg = 0;
             }
 
             else if(direction == 2 && *(field + now_pos(now_str, now_column) + 1) == 0) // 2 - right
             {
-                debagging_out(field, "if2|");
-                int *cursor = field; // neded to write field
+                cursor = field + now_pos(now_str, now_column); // neded to write field
                 now_column++; // change position
                 cursor + (now_pos(now_str, now_column)); // move cursor to now position
                 *cursor = 1; // marking way
                 treck.push_back(direction); // remeber way
-                cursor = new int;
-                delete cursor; // clear memory
-                cursor = NULL;
-                debagging_out(field, "|if2");
+                gg = 0;
             }
 
             else if(direction == 3 && *(field + now_pos(now_str, now_column) + num_column) == 0)// 3 - bottom
             {
-                debagging_out(field, "if3|");
-                int *cursor = field; // neded to write field
+                cursor = field + now_pos(now_str, now_column); // neded to write field
                 now_str++; // change position
                 cursor + (now_pos(now_str, now_column)); // move cursor to now position
                 *cursor = 1; // marking way
                 treck.push_back(direction); // remeber way
-                cursor = new int;
-                delete cursor; // clear memory
-                cursor = NULL;
-                debagging_out(field, "|if3");
+                gg = 0;
             }
         }
         else
         {
+            cout << "e";
             if(treck.back() == 0)
             {
                 now_column++;
                 treck.pop_back();
+                gg = 0;
             }
 
             else if(treck.back() == 1)
             {
                 now_str++;
                 treck.pop_back();
+                gg = 0;
             }
 
             else if(treck.back() == 2)
             {
                 now_column--;
                 treck.pop_back();
+                gg = 0;
             }
 
             else if(treck.back() == 3)
             {
                 now_str--;
                 treck.pop_back();
+                gg = 0;
             }
         }
     }
@@ -183,9 +174,11 @@ void made_random_map(int *field)
 
 int main()
 {
+    srand(time(NULL)); // create random seed
     int map [num_str][num_column];
 
     made_random_map(&map[0][0]);
+    cout << &map[0][0] << endl;
 
     for (int i = 0; i < num_str; i++)
     {

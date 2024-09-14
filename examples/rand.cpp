@@ -4,12 +4,18 @@
 
 using namespace std;
 
+int get_random_int(int min, int max)
+{
+    /*
+    this function take in input 2 numbers (min - from, max - to)
+    output is random int in range from min to max
+    */
+    int num = min + rand() % (max - min + 1);
+    return num;
+}
+
 int main()
 {
     srand(time(NULL)); // create random seed
-    int x;
-    int start = 10;
-    int end = 30;
-    x = rand() % (end - start + 1) + start;
-    cout << "x = " << x << endl;
+    cout << "x = " << get_random_int(0,3) << endl;
 }
