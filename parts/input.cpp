@@ -1,28 +1,21 @@
-//description//description//description//description//
-/*
-This file make arr with random map.
-Somethilg like that:
-#########    '#' is wall
-#as##zxh#    letters is field where game is takes place
-##d##c#x#    this letters have to be placet in random order,
-#jkgsd#m#    but same letters have not be near
-#########
-*/
-//description//description//description//description//
-
-
-
 //libraries//libraries//libraries//libraries//libraries//
 
 #include <bits/stdc++.h> //base library with all what can will be used
+#include <conio.h> //library to listen qeys (check button preses)
 #include "storadge.cpp" //all data
+#include <windows.h>
 
 //libraries//libraries//libraries//libraries//libraries//
 
-
+using namespace std;
 
 //functoins//functoins//functoins//functoins//functoins//
 
+void qey_preses_checker(){}
+
+//functoins//functoins//functoins//functoins//functoins//
+
+//test funcs//test funcs//test funcs//test funcs//test funcs//
 int get_random_int(int min, int max)
 {
     /*
@@ -139,65 +132,20 @@ void made_random_map(int *field)
     }
 }
 
-//functoins//functoins//functoins//functoins//functoins//
-
-//debagging////debagging////debagging////debagging////debagging//
-
-void debagging_out_treck(vector <int> treck)
-{
-    cout << "debagging_out_treck: ";
-
-    while (treck.size() > 0)
-    {
-        cout << int_to_direction(treck.back()) << " ";
-        treck.pop_back();
-    }
-    cout << endl;
-}
-
-string int_to_direction(int x)
-{
-    if (x == 0) {return "left";}
-    if (x == 1) {return "top";}
-    if (x == 2) {return "right";}
-    if (x == 3) {return "bottom";}
-    return "-1";
-}
-
-void debagging_out(int *field, string comment)
-{
-    cout << comment << endl;
-    int *cursor = field;
-    for (int i = 0; i < num_str; i++)
-    {
-        for (int j = 0; j < num_column; j++)
-        {
-            cout << *cursor << " ";
-            cursor++;
-        }
-    cout << endl;
-    }
-}
-
-//debagging////debagging////debagging////debagging////debagging//
+//test funcs//test funcs//test funcs//test funcs//test funcs//
 
 //main//main//main//main//main//main//main//main//main//main//
 
 int main()
 {
-    srand(time(NULL)); // create random seed
-    int map [num_str][num_column];
+    char ch;
 
-    made_random_map(&map[0][0]);
-
-    for (int i = 0; i < num_str; i++)
+    while(!_kbhit())
     {
-        for (int j = 0; j < num_column; j++)
-        {
-            cout << map[i][j] << " ";
-        }
-    cout << endl;
-    }
-}
+        ch =_getch();
 
+    }
+
+    return 0;
+}
 //main//main//main//main//main//main//main//main//main//main//
