@@ -93,7 +93,9 @@ int get_random_int(int min, int max)
 
 int calculate_now_pos(int now_str, int now_column)
 {
-    /*calculates and return now position*/
+    /*
+    calculates and return now position
+     */
     return now_str * num_column + now_column;
 }
 
@@ -114,7 +116,7 @@ bool can_move(int *field, int now_str, int now_column)
     else {return true;}
 }
 
-bool is_random_good(int *field)
+void fix_random_simbols(int *field)
 {
     /*
     this function return true if simbols around you not same with your simbol
@@ -122,24 +124,71 @@ bool is_random_good(int *field)
 
     int *cursor = field;
 
-    for (int now_str = 0; now_str < num_str; now_str++)
+    // int mask [num_str][num_column];
+    // int *masks_cudsor = &mask[0][0];
+
+    // for (int now_str = 0; now_str < num_str; now_str++) // fill mask by zeros
+    // {
+    //     for (int now_column = 0; now_column < num_column; now_column++)
+    //     {
+    //         mask [now_str][now_column] = 0;
+    //     }
+    // }
+
+    for (int now_str = 1; now_str < num_str; now_str++)
     {
-        for (int now_column = 0; now_column < num_column; now_column++)
+        for (int now_column = 1; now_column < num_column; now_column++)
         {
             cursor = field + calculate_now_pos(now_str, now_column);
-            int left_simbol = *(cursor - 1);
-            int top_simbol = *(cursor - num_column);
-            int right_simbol = *(cursor + 1);
-            int bottom_simbol = *(cursor - num_column);
 
-            if (*cursor != wall_char && (left_simbol == *cursor || top_simbol == *cursor || right_simbol == *cursor || bottom_simbol == *cursor)) {return false;}
+            int *left_simbol = cursor - 1;
+            int *top_simbol = cursor - num_column;
+            int *right_simbol = cursor + 1;
+            int *bottom_simbol = cursor + num_column;
 
-            if (left_simbol != wall_char && (left_simbol == top_simbol || left_simbol == right_simbol || left_simbol == bottom_simbol)) {return false;}
-            if (top_simbol != wall_char && (top_simbol == left_simbol || top_simbol == right_simbol || top_simbol == bottom_simbol)) {return false;}
+            while (true)
+            {
+                if (*left_simbol == *top_simbol && *left_simbol != wall_char)
+                {
+                    *top_simbol = get_random_int(min_char, max_char);
+                    now_str = 1;
+                    now_column = 1;
+                }
+                else if (*left_simbol == *right_simbol && *left_simbol != wall_char)
+                {
+                    *right_simbol= get_random_int(min_char, max_char);
+                    now_str = 1;
+                    now_column = 1;
+                }
+                else if (*left_simbol == *bottom_simbol && *left_simbol != wall_char)
+                {
+                    *bottom_simbol = get_random_int(min_char, max_char);
+                    now_str = 1;
+                    now_column = 1;
+                }
+                else if (*right_simbol == *top_simbol && *right_simbol != wall_char)
+                {
+                    *top_simbol = get_random_int(min_char, max_char);
+                    now_str = 1;
+                    now_column = 1;
+                }
+                else if (*right_simbol == *bottom_simbol && *right_simbol != wall_char)
+                {
+                    *bottom_simbol = get_random_int(min_char, max_char);
+                    now_str = 1;
+                    now_column = 1;
+                }
+                else if (*bottom_simbol == *top_simbol && *bottom_simbol != wall_char)
+                {
+                    *top_simbol = get_random_int(min_char, max_char);
+                    now_str = 1;
+                    now_column = 1;
+                }
+                else {break;}
+            }
+
         }
     }
-    
-    return true; 
 }
 
 void make_random_simbols(int *field)
@@ -167,6 +216,8 @@ void make_random_simbols(int *field)
             }
         }
     }
+
+    fix_random_simbols(field);
 
     // for (int now_str = 0; now_str < num_str; now_str++) // basic map prepare
     // {
