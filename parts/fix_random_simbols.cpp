@@ -93,7 +93,10 @@ int calculate_now_pos(int now_str, int now_column)
 void fix_random_simbols(int *field)
 {
     /*
-    this function return true if simbols around you not same with your simbol
+    this function saolutions problem with not unique simbols near one cell
+    a b c     a b c
+    d x y  => d x y
+    z c z     z c m
     */
 
     int *cursor = field;

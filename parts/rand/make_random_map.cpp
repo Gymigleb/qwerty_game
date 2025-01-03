@@ -119,21 +119,13 @@ bool can_move(int *field, int now_str, int now_column)
 void fix_random_simbols(int *field)
 {
     /*
-    this function return true if simbols around you not same with your simbol
+    this function saolutions problem with not unique simbols near one cell
+    a b c     a b c
+    d x y  => d x y
+    z c z     z c m
     */
 
     int *cursor = field;
-
-    // int mask [num_str][num_column];
-    // int *masks_cudsor = &mask[0][0];
-
-    // for (int now_str = 0; now_str < num_str; now_str++) // fill mask by zeros
-    // {
-    //     for (int now_column = 0; now_column < num_column; now_column++)
-    //     {
-    //         mask [now_str][now_column] = 0;
-    //     }
-    // }
 
     for (int now_str = 1; now_str < num_str; now_str++)
     {
@@ -218,23 +210,6 @@ void make_random_simbols(int *field)
     }
 
     fix_random_simbols(field);
-
-    // for (int now_str = 0; now_str < num_str; now_str++) // basic map prepare
-    // {
-    //     for (int now_column = 0; now_column < num_column; now_column++) // basic map prepare
-    //     {
-    //         cursor = field + calculate_now_pos(now_str, now_column); // move cursor to now position
-            
-    //         if(*cursor != wall_char)
-    //         {
-    //             while (!is_random_good(field))
-    //             {
-    //                 *cursor = get_random_int(min_char, max_char);
-    //                 debagging_out(field, "roll", true, "");
-    //             }
-    //         }
-    //     }
-    // }
 }
 
 void make_random_map(int *field)
