@@ -43,26 +43,35 @@ void set_size(int height, int length)
  
 int main()
 {
-    set_size(16, 16);
-
-    for (int i = 0; i < 16; i++)
-    {
-        for (int j = 0; j < 16; j++)
-        {
-            set_color(i, j);
-
-            // if (i < 10) {cout << "0" << i << " ";}
-            // else {cout << i << " ";}
-
-            // if (j < 10) {cout << "0" << j << " ";}
-            // else {cout << j << "// ";}
-
-            cout << " ";
-        }
-    }
+    HANDLE hWnd = GetStdHandle(STD_OUTPUT_HANDLE);
+    COORD bufferSize = {16, 32};
+    SetConsoleScreenBufferSize(hWnd, bufferSize);
+    HWND hWindowConsole = GetConsoleWindow();
+    RECT r;
+    GetWindowRect(hWindowConsole, &r); //stores the console's current dimensions
+    MoveWindow(hWindowConsole, r.left, r.top, 161, 170, TRUE);
     
-    cin.get();
- 
+    while (true)
+    {
+        for (int i = 0; i < 16; i++)
+        {
+            for (int j = 0; j < 16; j++)
+            {
+                set_color(i, j);
+
+                // if (i < 10) {cout << "0" << i << " ";}
+                // else {cout << i << " ";}
+
+                // if (j < 10) {cout << "0" << j << " ";}
+                // else {cout << j << "// ";}
+
+                cout << "0";
+            }
+            cout << endl;
+        }
+        set_color(0, 0);
+        cin.get();
+    }
     return 0;
 }
 /*

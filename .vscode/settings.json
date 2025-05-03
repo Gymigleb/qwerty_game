@@ -42,5 +42,6 @@
         "streambuf": "cpp",
         "typeinfo": "cpp",
         "regex": "cpp"
-    }
+    },
+    "editor.renderWhitespace": "all"
 }
